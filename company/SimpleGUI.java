@@ -6,6 +6,7 @@ import javax.swing.*;
 import javax.swing.table.*;
 
 
+
 public class SimpleGUI {
 
 
@@ -110,6 +111,7 @@ public class SimpleGUI {
         panelFive.add(button52);
         button52.addActionListener(new ButtonEventSeven());
         panelFive.add(button53);
+        button53.addActionListener(new ButtonEventEight());
         panelFive.add(scrollPane);
         model.addColumn("Первый столбец");
         model.addColumn("Второй столбец");
@@ -195,11 +197,19 @@ public class SimpleGUI {
     }
     class ButtonEventSeven implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            
-
-
-
-
+            int row = table.getSelectedRow();
+            String tableText = (String) table.getValueAt(row, 0);
+            table.setValueAt(tableText, row, 1);
+            table.setValueAt("",row, 0);
+        }
+    }
+    class ButtonEventEight implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            int row = table.getSelectedRow();
+            String tableText = (String) table.getValueAt(row, 1);
+            table.setValueAt(tableText, row, 0);
+            table.setValueAt("",row, 1);
         }
     }
 }
+
