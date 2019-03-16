@@ -9,41 +9,28 @@ import javax.swing.table.*;
 
 public class SimpleGUI {
 
-
-    private Label label1 = new Label("Punkt #1 ");
-    private JButton button11 = new JButton("внести");
     private JTextField text1 = new JTextField("", 2);
     private JComboBox<String> comboBox = new JComboBox<String>();
 
-    private Label label2 = new Label("Punkt #2 ");
     private JTextField text2 = new JTextField("", 2);
     private JButton button21 = new JButton("изменение названия");
     private JButton button22 = new JButton("обмен названиями");
 
-    private Label label3 = new Label("Punkt #3 ");
     private JTextField text3 = new JTextField("", 2);
-    private JButton button31 = new JButton("выбрать");
     private JRadioButton radioButton31 = new JRadioButton("one");
     private JRadioButton radioButton32 = new JRadioButton("two");
     private JRadioButton radioButton33 = new JRadioButton("three");
 
-    private Label label4 = new Label("Punkt #4 ");
     private JTextField text4 = new JTextField("", 2);
-    private JButton button41 = new JButton("пометить");
     private JCheckBox checkBox41 = new JCheckBox("one");
     private JCheckBox checkBox42 = new JCheckBox("two");
     private JCheckBox checkBox43 = new JCheckBox("three");
 
-    private Label label5 = new Label("Punkt #5 ");
     private JTextField text5 = new JTextField("", 2);
-    private JButton button51 = new JButton("добавить");
-    private JButton button52 = new JButton("сместить вправо");
-    private JButton button53 = new JButton("сместить влево");
     private JTable table = new JTable(0,0);
     private DefaultTableModel model = (DefaultTableModel) table.getModel();
-    private JScrollPane scrollPane = new JScrollPane(table);
-
-
+//меньшить количество полей в классе
+//что делается полем
 
     public SimpleGUI() {
 
@@ -53,6 +40,9 @@ public class SimpleGUI {
         container.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         container.setLayout(new GridLayout( 5, 1, 1, 3));
+
+        Label label1 = new Label("Punkt #1 ");
+        JButton button11 = new JButton("внести");
 
         JPanel panelOne = new JPanel();
         panelOne.add(label1);
@@ -66,6 +56,8 @@ public class SimpleGUI {
         container.add(panelOne);
 
 
+        Label label2 = new Label("Punkt #2 ");
+
         JPanel panelTwo = new JPanel();
         panelTwo.add(label2);
         text2.setColumns(10);
@@ -75,6 +67,9 @@ public class SimpleGUI {
         button22.addActionListener(new ButtonEventThree());
         panelTwo.add(button22);
         container.add(panelTwo);
+
+        Label label3 = new Label("Punkt #3 ");
+        JButton button31 = new JButton("выбрать");
 
         JPanel panelThree = new JPanel();
         panelThree.add(label3);
@@ -91,6 +86,9 @@ public class SimpleGUI {
         button31.addActionListener(new ButtonEventFour());
         container.add(panelThree);
 
+        Label label4 = new Label("Punkt #4 ");
+        JButton button41 = new JButton("пометить");
+
         JPanel panelFour = new JPanel();
         panelFour.add(label4);
         text4.setColumns(10);
@@ -101,6 +99,12 @@ public class SimpleGUI {
         panelFour.add(checkBox43);
         button41.addActionListener(new ButtonEventFive());
         container.add(panelFour);
+
+        Label label5 = new Label("Punkt #5 ");
+        JButton button51 = new JButton("добавить");
+        JButton button52 = new JButton("сместить вправо");
+        JButton button53 = new JButton("сместить влево");
+        JScrollPane scrollPane = new JScrollPane(table);
 
         JPanel panelFive = new JPanel();
         panelFive.add(label5);
@@ -173,13 +177,16 @@ public class SimpleGUI {
         public void actionPerformed(ActionEvent e) {
             String vibor4 = text4.getText();
             if (vibor4.equals("one")) {
-                checkBox41.setSelected(true);
+                boolean one = checkBox41.isSelected();
+                checkBox41.setSelected(!one);
             }
             else if (vibor4.equals("two")) {
-                checkBox42.setSelected(true);
+                boolean two = checkBox42.isSelected();
+                checkBox42.setSelected(!two);
             }
             else if (vibor4.equals("three")) {
-                checkBox43.setSelected(true);
+                boolean three = checkBox43.isSelected();
+                checkBox43.setSelected(!three);
             }
             else {
                 JOptionPane.showMessageDialog(new JFrame(), "такой позиции не существует", "Error", JOptionPane.ERROR_MESSAGE);
@@ -190,25 +197,32 @@ public class SimpleGUI {
         public void actionPerformed(ActionEvent e) {
             String textField5 = text5.getText();
             model.addRow(new String[]{textField5, ""});
-          /*  if (model.getRowCount() == 1) {
-                table.setRowSelectionInterval(0, 0);
-            }*/
         }
     }
     class ButtonEventSeven implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             int row = table.getSelectedRow();
             String tableText = (String) table.getValueAt(row, 0);
-            table.setValueAt(tableText, row, 1);
-            table.setValueAt("",row, 0);
+            if (tableText.equals("")){
+                JOptionPane.showMessageDialog(new JFrame(), "ячейка пуста", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            else {
+                table.setValueAt(tableText, row, 1);
+                table.setValueAt("", row, 0);
+            }
         }
     }
     class ButtonEventEight implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             int row = table.getSelectedRow();
             String tableText = (String) table.getValueAt(row, 1);
-            table.setValueAt(tableText, row, 0);
-            table.setValueAt("",row, 1);
+            if (tableText.equals("")){
+                JOptionPane.showMessageDialog(new JFrame(), "ячейка пуста", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            else {
+                table.setValueAt(tableText, row, 0);
+                table.setValueAt("", row, 1);
+            }
         }
     }
 }
