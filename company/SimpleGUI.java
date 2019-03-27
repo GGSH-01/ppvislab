@@ -26,6 +26,11 @@ public class SimpleGUI {
     private JCheckBox checkBox42 = new JCheckBox("two");
     private JCheckBox checkBox43 = new JCheckBox("three");
 
+    private Object[][] array = new String[][] {{ "Сахар" , "кг", "1.5" },
+            { "Мука"  , "кг", "4.0" },
+            { "Молоко", "л" , "2.2" }};
+    private Object[] columnsHeader = new String[] {"Наименование", "Ед.измерения", "Количество"};
+
     private JTextField text5 = new JTextField("", 2);
     private JTable table = new JTable(0,0);
     private DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -117,15 +122,22 @@ public class SimpleGUI {
         panelFive.add(button53);
         button53.addActionListener(new ButtonEventEight());
         panelFive.add(scrollPane);
-        model.addColumn("Первый столбец");
-        model.addColumn("Второй столбец");
+       /* int i=3;
+        String tabletext1 =" первый столбец", start1, string1;
+        for (i=1; i<5; i++) {
+            start1 = tabletext1.substring(14, 15);
+            tabletext1 = start1 + tabletext1;
+            model.addColumn(tabletext1);
+            //tableText1 = start1 + stroka1 + end1;
+           // model.addColumn("Второй столбец");
+            container.add(panelFive);
+        }*/
+        JTable table1 = new JTable(array, columnsHeader);
+        panelFive.add(table1);
         container.add(panelFive);
 
-
-
-
-
     }
+
     class  ButtonEventOne implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             String items = text1.getText();
