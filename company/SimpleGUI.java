@@ -2,6 +2,7 @@ package com.company;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Vector;
 import javax.swing.*;
 import javax.swing.table.*;
 
@@ -25,11 +26,6 @@ public class SimpleGUI {
     private JCheckBox checkBox41 = new JCheckBox("one");
     private JCheckBox checkBox42 = new JCheckBox("two");
     private JCheckBox checkBox43 = new JCheckBox("three");
-
-    private Object[][] array = new String[][] {{ "Сахар" , "кг", "1.5" },
-            { "Мука"  , "кг", "4.0" },
-            { "Молоко", "л" , "2.2" }};
-    private Object[] columnsHeader = new String[] {"Наименование", "Ед.измерения", "Количество"};
 
     private JTextField text5 = new JTextField("", 2);
     private JTable table = new JTable(0,0);
@@ -122,19 +118,28 @@ public class SimpleGUI {
         panelFive.add(button53);
         button53.addActionListener(new ButtonEventEight());
         panelFive.add(scrollPane);
-       /* int i=3;
-        String tabletext1 =" первый столбец", start1, string1;
-        for (i=1; i<5; i++) {
+        int i=3;
+        String tabletext1 =" первый столбец", tabletext2 =" второй столбец", start1, start2;
+        Vector col = new Vector();
+
+        col.addElement(tabletext1);
+        col.addElement(tabletext2);
+        model.setColumnIdentifiers(col);
+        TableColumn column1 = table.getTableHeader().getColumnModel().getColumn(0);
+        TableColumn column2 = table.getTableHeader().getColumnModel().getColumn(1);
+       /* column1.setHeaderValue(tabletext1);
+        column2.setHeaderValue(tabletext2);
+        container.add(panelFive);*/
+        while (i<5) {
             start1 = tabletext1.substring(14, 15);
+            start2 = tabletext2.substring(14, 15);
             tabletext1 = start1 + tabletext1;
-            model.addColumn(tabletext1);
-            //tableText1 = start1 + stroka1 + end1;
-           // model.addColumn("Второй столбец");
+            tabletext2 = start2 + tabletext2;
+            column1.setHeaderValue(tabletext1);
+            column2.setHeaderValue(tabletext2);
             container.add(panelFive);
-        }*/
-        JTable table1 = new JTable(array, columnsHeader);
-        panelFive.add(table1);
-        container.add(panelFive);
+        }
+
 
     }
 
