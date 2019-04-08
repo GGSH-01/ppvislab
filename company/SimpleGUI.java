@@ -128,8 +128,6 @@ public class SimpleGUI {
         model.setColumnIdentifiers(col);
         TableColumn column1 = table.getTableHeader().getColumnModel().getColumn(0);
         TableColumn column2 = table.getTableHeader().getColumnModel().getColumn(1);
-        String str1 = moveString(tabletext1);
-        String str2 = moveString(tabletext2);
 
         while (i<5) {
            /* start1 = tabletext1.substring(14, 15);
@@ -140,11 +138,11 @@ public class SimpleGUI {
             tabletext2 = start2 + tabletext2;
             str2 = tabletext2.substring(0, 15);*/
 
-            str1 = moveString(str1);
-            str2 = moveString(str2);
+            tabletext1 = moveString(tabletext1);
+            tabletext2 = moveString(tabletext2);
 
-            column1.setHeaderValue(moveString(str1));
-            column2.setHeaderValue(moveString(str2));
+            column1.setHeaderValue(moveString(tabletext1));
+            column2.setHeaderValue(moveString(tabletext2));
             container.add(panelSix);
             try {
                 Thread.sleep(100);
