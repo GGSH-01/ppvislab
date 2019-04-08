@@ -30,17 +30,16 @@ public class SimpleGUI {
     private JTextField text5 = new JTextField("", 2);
     private JTable table = new JTable(0,0);
     private DefaultTableModel model = (DefaultTableModel) table.getModel();
-//меньшить количество полей в классе
-//что делается полем
+
 
     public SimpleGUI() {
 
         JFrame container = new JFrame() {};
         container.setVisible(true);
-        container.setBounds(500, 1, 600,730);
+        container.setBounds(150, 1, 1200,500);
         container.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        container.setLayout(new GridLayout( 5, 1, 1, 3));
+        container.setLayout(new GridLayout( 3, 2, 1, 3));
 
         Label label1 = new Label("Punkt #1 ");
         JButton button11 = new JButton("внести");
@@ -117,29 +116,52 @@ public class SimpleGUI {
         button52.addActionListener(new ButtonEventSeven());
         panelFive.add(button53);
         button53.addActionListener(new ButtonEventEight());
-        panelFive.add(scrollPane);
-        int i=3;
-        String tabletext1 =" первый столбец", tabletext2 =" второй столбец", start1, start2;
-        Vector col = new Vector();
+        container.add(panelFive);
 
+        JPanel panelSix = new JPanel();
+        int i=3;
+        String tabletext1 =" первый столбец", tabletext2 =" второй столбец";
+        Vector col = new Vector();
+        panelSix.add(scrollPane);
         col.addElement(tabletext1);
         col.addElement(tabletext2);
         model.setColumnIdentifiers(col);
         TableColumn column1 = table.getTableHeader().getColumnModel().getColumn(0);
         TableColumn column2 = table.getTableHeader().getColumnModel().getColumn(1);
-       /* column1.setHeaderValue(tabletext1);
-        column2.setHeaderValue(tabletext2);
-        container.add(panelFive);*/
+        String str1 = moveString(tabletext1);
+        String str2 = moveString(tabletext2);
+
         while (i<5) {
-            start1 = tabletext1.substring(14, 15);
-            start2 = tabletext2.substring(14, 15);
+           /* start1 = tabletext1.substring(14, 15);
             tabletext1 = start1 + tabletext1;
+            str1 = tabletext1.substring(0, 15);
+
+            start2 = tabletext2.substring(14, 15);
             tabletext2 = start2 + tabletext2;
-            column1.setHeaderValue(tabletext1);
-            column2.setHeaderValue(tabletext2);
-            container.add(panelFive);
+            str2 = tabletext2.substring(0, 15);*/
+
+            str1 = moveString(str1);
+            str2 = moveString(str2);
+
+            column1.setHeaderValue(moveString(str1));
+            column2.setHeaderValue(moveString(str2));
+            container.add(panelSix);
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e1) {
+            }
         }
 
+
+    }
+
+    public String moveString(String text) {
+
+        String start, str;
+        start = text.substring(14, 15);
+        text = start + text;
+        str = text.substring(0, 15);
+        return str;
 
     }
 
