@@ -157,8 +157,7 @@ public class SimpleGUI {
 
     public String moveString(String text) {
         String str;
-        int a = text.length() - 1;
-        str = text.substring(text.length() - 1) + text.substring(0, a);
+        str = text.substring(text.length() - 1) + text.substring(0, text.length() - 1);
         return str;
     }
 
