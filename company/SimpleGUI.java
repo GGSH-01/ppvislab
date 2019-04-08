@@ -156,13 +156,10 @@ public class SimpleGUI {
     }
 
     public String moveString(String text) {
-
-        String start, str;
-        start = text.substring(14, 15);
-        text = start + text;
-        str = text.substring(0, 15);
+        String str;
+        int a = text.length() - 1;
+        str = text.substring(text.length() - 1) + text.substring(0, a);
         return str;
-
     }
 
     class  ButtonEventOne implements ActionListener {
